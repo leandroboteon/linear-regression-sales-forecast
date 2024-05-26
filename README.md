@@ -44,14 +44,28 @@ Utilizamos a base de dados "MKT.csv", que contém informações sobre investimen
 #### Etapa 01: Análise Descritiva
 Exploramos os dados do dataset "MKT.csv" para compreender melhor as variáveis e identificar problemas. Utilizamos a biblioteca Pandas para importar e manipular os dados, realizando cálculos estatísticos e visualizações para entender a distribuição dos dados.
 
+<img width="213" alt="image" src="https://github.com/leandroboteon/regressao-invest-mkt/assets/167100723/91755b51-fcc0-4eda-9c2a-2019058e3daf">
+<img width="275" alt="image" src="https://github.com/leandroboteon/regressao-invest-mkt/assets/167100723/194bc5be-9614-44bb-8d0b-47ae06b9a8cd">
+
+
 #### Etapa 02: Análise Exploratória
 Exploramos mais a fundo os dados, identificando relações entre as variáveis e descobrindo padrões relevantes. Utilizamos técnicas de visualização de dados e análises estatísticas para buscar possíveis correlações e identificar outliers.
+
+<img width="311" alt="image" src="https://github.com/leandroboteon/regressao-invest-mkt/assets/167100723/57902692-a057-4ea0-bb09-408a77d80746">
+<img width="291" alt="image" src="https://github.com/leandroboteon/regressao-invest-mkt/assets/167100723/e52715f6-32c1-4bb5-9ad2-875bd86f2da0">
+
 
 #### Etapa 03: Construção do Modelo de Regressão
 Construímos e treinamos o modelo de regressão linear utilizando os dados limpos. Dividimos os dados em conjuntos de treinamento e teste, escalamos as features e treinamos o modelo. Avaliamos o desempenho do modelo utilizando a métrica do R².
 
+<img width="510" alt="image" src="https://github.com/leandroboteon/regressao-invest-mkt/assets/167100723/7ab99def-151f-42f2-8f11-f030a4c998c6">
+
+
 #### Etapa 04: Predições
 Utilizamos o modelo treinado para prever o valor de vendas com base em novos dados de investimento fornecidos pelo usuário.
+
+<img width="498" alt="image" src="https://github.com/leandroboteon/regressao-invest-mkt/assets/167100723/6a11f5e1-4408-45d8-8c79-9c153ee881ed">
+
 
 ## Resultados
 Após a análise e construção do modelo, os principais resultados foram:
