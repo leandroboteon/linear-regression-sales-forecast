@@ -1,4 +1,4 @@
-# Modelo de Regressão para Avaliar Investimentos em Marketing
+# Regressão Linear: Avaliação de Investimentos em Marketing
 
 ## Introdução
 Neste projeto, utilizando dados de uma empresa fictícia, nosso objetivo é desenvolver um modelo de regressão para estimar as vendas com base nos investimentos realizados em plataformas de publicidade online, como YouTube, Facebook e jornais.
@@ -7,13 +7,6 @@ Após o tratamento dos outliers, analisaremos de forma mais precisa a relação 
 
 Para acessar o projeto no Colab, clique [aqui](https://colab.research.google.com/github/leandroboteon/regressao-invest-mkt/blob/main/Regressao_para_MKT.ipynb).
 
-## Objetivos do Projeto
-
-- **Identificar padrões e correlações entre as variáveis.**
-- **Identificar e tratar outliers.**
-- **Construir um modelo de regressão linear para prever vendas com base em novos investimentos.**
-- **Fornecer previsões de vendas com base em diferentes níveis de investimento.**
-
 ## Tecnologias utilizadas
 * `python`
 * `pandas`
@@ -21,17 +14,18 @@ Para acessar o projeto no Colab, clique [aqui](https://colab.research.google.com
 * `matplotlib`
 * `seaborn`
 * `scikit-learn`
+* `statsmodels`
 
 ## Estrutura do Projeto
 
 O projeto está dividido nas seguintes etapas:
+1. Análise Exploratória de Dados (EDA)
+2. Pré-processamento de Dados
+3. Análise Estatística com `statsmodels`
+4. Construção do Modelo
+5. Avaliação do ModeloConclusão
+6. Conclusão
 
-1. **Análise Descritiva**
-2. **Análise Exploratória**
-3. **Identificação e Tratamento de Outliers**
-4. **Construção do Modelo de Regressão**
-5. **Predições**
-6. **Conclusão**
 
 ## Base de Dados
 
@@ -44,20 +38,21 @@ Utilizamos a base de dados "MKT.csv", que contém informações sobre investimen
 
 ## Metodologia
 
-#### 1. Análise Descritiva
+#### 1. Análise Exploratória de Dados (EDA)
 Exploramos os dados do dataset "MKT.csv" para compreender melhor as variáveis e identificar problemas. Utilizamos a biblioteca Pandas para importar e manipular os dados, realizando cálculos estatísticos e visualizações para entender a distribuição dos dados.
 
 <img width="213" alt="image" src="https://github.com/leandroboteon/regressao-invest-mkt/assets/167100723/91755b51-fcc0-4eda-9c2a-2019058e3daf">
 <img width="275" alt="image" src="https://github.com/leandroboteon/regressao-invest-mkt/assets/167100723/194bc5be-9614-44bb-8d0b-47ae06b9a8cd">
 
 
-#### 2. Análise Exploratória
 Exploramos mais a fundo os dados, identificando relações entre as variáveis e descobrindo padrões relevantes. Utilizamos técnicas de visualização de dados e análises estatísticas para buscar possíveis correlações e identificar outliers.
 
 <img width="311" alt="image" src="https://github.com/leandroboteon/regressao-invest-mkt/assets/167100723/57902692-a057-4ea0-bb09-408a77d80746">
 <img width="291" alt="image" src="https://github.com/leandroboteon/regressao-invest-mkt/assets/167100723/e52715f6-32c1-4bb5-9ad2-875bd86f2da0">
 
-#### 3. Identificação e Tratamento de Outliers
+#### 2. Pré-processamento de Dados
+
+#### 2.1 Identificação e Tratamento de Outliers
 - Inicialmente, utilizamos gráficos boxplot para identificar visualmente a presença de outliers na coluna 'newspaper'. Observamos também o histograma desta feature e constatamos que os dados não seguem uma distribuição normal. Portanto, optamos pelo método do intervalo interquartil (IQR) para identificar e tratar os outliers devido à sua robustez contra distribuições não normais.
 
    ![image](https://github.com/leandroboteon/linear-regression-sales-forecast/assets/167100723/a6af6f12-941a-4d34-ac7a-63d7d0b35114)
@@ -69,52 +64,58 @@ Exploramos mais a fundo os dados, identificando relações entre as variáveis e
 
    ![image](https://github.com/leandroboteon/linear-regression-sales-forecast/assets/167100723/ebcf019e-3ef1-4ff4-a0c8-8c10cf5b2504)
 
-- Para validar o impacto do tratamento, geramos um novo gráfico boxplot e constatamos que não há mais outliers presentes, indicando que os dados agora estão dentro dos limites da distribuição dos dados concentrados.
+#### 2.2 Normalização dos Dados utilizando MinMaxScaler
 
-  ![image](https://github.com/leandroboteon/linear-regression-sales-forecast/assets/167100723/56b0afcc-26b5-4f99-955a-83f67948c06e)
+Nesta etapa, aplicamos o MinMaxScaler para normalizar os dados, garantindo que todas as variáveis estejam na mesma escala e, assim, melhorar o desempenho dos modelos preditivos.
 
+![image](https://github.com/user-attachments/assets/96d7ccc0-ba3a-44c9-8dab-ce6c5a24fbe5)
 
-#### 4. Construção do Modelo de Regressão
-- Inicialmente os dados são divididos em conjuntos de treinamento e teste, com 70% dos dados reservados para treinamento e 30% para teste, utilizando a função `train_test_split` do `scikit-learn`. Em seguida, é importada a biblioteca necessária para realizar uma regressão linear utilizando `LinearRegression` do `sklearn.linear_model`.
+#### 3. Análise Estatística com `statsmodels`
+Utilizamos a biblioteca statsmodels para realizar uma análise estatística detalhada. Esta etapa nos permitiu compreender melhor as relações entre os investimentos em marketing e as vendas, avaliando a significância das variáveis independentes no modelo de regressão.
+Decidimos remover a variável `newspaper`, pois seu p-value está maior que 5%, indicando que não é estatisticamente significativa.
 
-  ![image](https://github.com/leandroboteon/linear-regression-sales-forecast/assets/167100723/e330a18b-6e5c-4cb7-bb07-ffd294724c66)
-
-
-- Um modelo de regressão linear é definido e inicializado com *lm = LinearRegression()*. Posteriormente, o modelo é treinado com os dados de treinamento utilizando *lm.fit(X_train, Y_train)*.
-
-  ![image](https://github.com/leandroboteon/linear-regression-sales-forecast/assets/167100723/9d3376b9-096d-4bcf-b3a2-7f97c949a467)
+![image](https://github.com/user-attachments/assets/6d1d3dbf-e979-4a47-a8eb-d57cd3654f35)
 
 
-- Após o treinamento, são feitas predições utilizando os dados de teste com *Y_pred = lm.predict(X_test)*. Para visualizar a eficácia do modelo, os valores reais de vendas *(Y_test.values)* e as predições *(Y_pred)* são comparados em um gráfico. Neste gráfico, os valores reais são representados pela linha azul e as predições pelo linha vermelha, permitindo uma avaliação visual da precisão do modelo na previsão de vendas.
+#### 4. Construção do Modelo
+Inicialmente os dados são divididos em conjuntos de treinamento e teste, com 70% dos dados reservados para treinamento e 30% para teste, utilizando a função `train_test_split` do `scikit-learn`. Em seguida, é importada a biblioteca necessária para realizar uma regressão linear utilizando `LinearRegression` do `sklearn.linear_model`.
 
-  ![image](https://github.com/leandroboteon/linear-regression-sales-forecast/assets/167100723/170df5a3-7424-4df2-9075-a15f9634db06)
-
-
-#### 5. Métrica para avaliação da eficácia
-Para avaliar a eficácia do modelo construído, utilizamos o coeficiente de determinação (R-quadrado). O valor obtido para esta métrica foi de 0.91, indicando que o modelo explica cerca de 91% da variabilidade dos dados de vendas com base nos investimentos em plataformas de publicidade online (Youtube, Facebook e jornais).
-
-![image](https://github.com/leandroboteon/linear-regression-sales-forecast/assets/167100723/72f88c3b-c663-4ae4-9abf-27327030f40a)
+   ![image](https://github.com/user-attachments/assets/16039141-62dd-4750-a4b6-01fbea288f95)
 
 
-#### 6. Predições
-Utilizamos o modelo treinado para prever o valor de vendas com base em novos dados de investimento fornecidos pelo usuário. Obtivemos um valor de vendas de 6.21 para as seguintes entradas: *YouTube = 20*, *Facebook = 10*, e *Newspaper = 5*.
+#### 5. Avaliação do Modelo
+Avaliação do desempenho do modelo de regressão linear utilizando as seguintes métricas:
 
-![image](https://github.com/leandroboteon/linear-regression-sales-forecast/assets/167100723/2d8f865b-6b2e-40e5-895a-b66ccbad626d)
+![image](https://github.com/user-attachments/assets/0b59a0da-216c-4249-8c2f-337c8c60a7e9)
+
+Analisamos os seguintes aspectos:
+
+- **Gráfico de Linha**: Comparação entre valores reais e predições, com a linha vermelha representando as predições e a linha azul representando os dados de teste.
+  
+![image](https://github.com/user-attachments/assets/c890ea56-9b6a-427b-88d2-7ee45ebb8504)
+
+  
+- **Gráfico de Dispersão**: Comparação entre valores reais e predições, onde os pontos estão próximos da linha vermelha ideal.
+  
+![image](https://github.com/user-attachments/assets/ccc41a92-eb62-4ac2-a437-5a195692c7f4)
 
 
-## Resultados
-Após a análise e construção do modelo, destacamos os principais resultados alcançados:
-- Identificamos uma correlação significativa entre os investimentos no Youtube e as vendas (correlação de 0.78), indicando que aumentos nos investimentos nesta plataforma estão associados a aumentos nas vendas.
-- Durante a análise, identificamos outliers nos dados de investimentos em newspaper e aplicamos técnicas de tratamento para removê-los, melhorando assim a robustez do modelo.
-- O modelo de regressão linear treinado apresentou um coeficiente de determinação (R²) de 0.91, demonstrando sua eficácia em explicar a variabilidade dos dados de vendas com base nos investimentos em marketing.
+- **Histograma dos Resíduos**: Mostra a distribuição dos resíduos com uma linha de tendência indicando a normalidade dos resíduos.
+  
+![image](https://github.com/user-attachments/assets/71c358f5-17c2-42df-8cc5-3a8dbc9fcc1a)
+  
 
-## Conclusão
-Neste projeto, exploramos e analisamos os dados de investimentos em marketing para construir um modelo de regressão linear que prevê o valor de vendas. Durante o processo, identificamos outliers nos investimentos em newspaper e aplicamos técnicas para removê-los, o que aprimorou a qualidade das previsões do modelo.
+## 6. Conclusão
 
-📈 Identificamos uma forte correlação entre os investimentos no Youtube e as vendas (correlação de 0.78), destacando que aumentos nos investimentos nesta plataforma estão associados a aumentos nas vendas.
+Neste projeto, desenvolvemos um modelo de regressão linear para prever o valor de vendas com base em investimentos em marketing.
 
-📊 O modelo de regressão linear treinado demonstrou um bom desempenho, com um coeficiente de determinação (R²) de 0.91. Isso significa que aproximadamente 91% da variabilidade das vendas pode ser explicada pelos investimentos em marketing analisados.
+- 📈 Identificamos uma forte correlação entre a variável `youtube` e as vendas (`sales`), indicando que os investimentos nesta plataforma têm um impacto positivo nas vendas.
+- 🧪 A análise com `statsmodels` revelou que a variável `newspaper` não é estatisticamente significativa, com um p-value superior a 5%. Portanto, a removemos do modelo. As variáveis `youtube` e `facebook` mostraram-se mais relevantes para o aumento das vendas.
+- 📊 As métricas de desempenho do modelo foram:
+  - **R²**: 0.9147
+  - **MAE**: 0.0477
+  - **MSE**: 0.0034
+  - **RMSE**: 0.0585
 
-⚙ Para futuras melhorias, recomenda-se a avaliação de outras métricas de desempenho do modelo, além do R-quadrado. Por exemplo, métricas como o erro médio absoluto (MAE) e o erro médio quadrático (MSE) podem fornecer uma visão mais detalhada da precisão das previsões e da robustez do modelo em diferentes cenários.
-
-🚀 Em suma, o modelo desenvolvido neste projeto não apenas fornece insights sobre a relação entre investimentos em marketing e vendas, mas também serve como uma ferramenta prática para tomada de decisões estratégicas. Ao utilizar previsões baseadas em dados, a empresa pode otimizar seus investimentos em marketing e maximizar o retorno sobre esses investimentos
+  Esses resultados demonstram um bom ajuste do modelo aos dados.
+- 🔍 Observando o gráfico de valores, notamos que o modelo prevê com boa precisão. O gráfico de dispersão entre valores reais e preditos mostra que os pontos estão próximos da linha ideal, e o histograma dos resíduos indica uma distribuição normal.
